@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Mine Quest - version 0.4.7</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/ui-controls.css">
+    <link rel="stylesheet" href="css/mine-menu.css">
+    <link rel="stylesheet" href="css/startpage.css">
+    <link rel="stylesheet" href="css/merchant-dialog.css">
+    <link rel="stylesheet" href="css/chest-dialog.css">
+</head>
+
+<body>
+    <!-- Start Page Container -->
+    <div id="startPage" class="start-page">
+        <div class="animated-background">
+            <div class="layer layer-1"></div>
+            <div class="layer layer-2"></div>
+            <div class="layer layer-3"></div>
+        </div>
+        <div class="content">
+            <h1 class="game-title">Mine Quest</h1>
+            <p class="subtitle">Underground Explorer</p>
+            <p class="subtitle">version 0.4.7</p>
+            <div class="menu-buttons">
+                <button id="startStandard" class="menu-btn">Start Quest</button>
+                <button id="loadQuest" class="menu-btn">Load Quest</button>
+                <button id="startChallenges" class="menu-btn">Challenges</button>
+                <button id="options" class="menu-btn">Options</button>
+                <button id="howToPlay" class="menu-btn">How to Play</button>
+                <button id="exitGame" class="menu-btn">Exit Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div id="gameContainer" class="game-container hidden">
+        <!-- Game Info Bar -->
+        <div id="gameInfoBar" class="game-info-bar">
+            <div class="info-item">
+                <span class="label">Area:</span>
+                <span id="areaName" class="value">Unknown</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Exits:</span>
+                <span id="exitCount" class="value">0</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Level:</span>
+                <span id="playerLevel" class="value">1</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Health:</span>
+                <span id="playerHealth" class="value">100/100</span>
+            </div>
+            <div class="info-item">
+                <span class="label">XP:</span>
+                <span id="playerXP" class="value">0/100</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Coins:</span>
+                <span id="playerCoins" class="value">0</span>
+            </div>
+            <div class="info-item timer hidden">
+                <span class="label">Time:</span>
+                <span id="timeRemaining" class="value">10:00</span>
+            </div>
+        </div>
+
+        <!-- Game Canvas Container -->
+        <div class="canvas-container">
+            <canvas id="gameCanvas"></canvas>
+            <div id="touchControls" class="touch-controls hidden">
+                <div class="d-pad">
+                    <button class="d-pad-btn up" data-direction="up">↑</button>
+                    <button class="d-pad-btn down" data-direction="down">↓</button>
+                    <button class="d-pad-btn left" data-direction="left">←</button>
+                    <button class="d-pad-btn right" data-direction="right">→</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Touch Controls Toggle Button (PC only) -->
+        <button id="touchControlsToggle" class="touch-controls-toggle" title="Toggle Touch Controls">
+            🎮
+        </button>
+
+        <!-- Bottom UI Controls (Always Visible) -->
+        <div class="bottom-controls">
+            <button id="inventoryBtn" class="control-btn">
+                <span class="icon">📦</span>
+                <span class="label">Inventory (Q)</span>
+            </button>
+            <button id="equipmentBtn" class="control-btn">
+                <span class="icon">⚔️</span>
+                <span class="label">Equipment (E)</span>
+            </button>
+            <button id="statsBtn" class="control-btn">
+                <span class="icon">📊</span>
+                <span class="label">Stats (Z)</span>
+            </button>
+            <button id="achievementsBtn" class="control-btn">
+                <span class="icon">🏆</span>
+                <span class="label">Achievements (X)</span>
+            </button>
+            <button id="skillsBtn" class="control-btn">
+                <span class="icon">🎯</span>
+                <span class="label">Skills (C)</span>
+            </button>
+            <button id="mineMenuBtn" class="control-btn">
+                <span class="icon">🪓</span>
+                <span class="label">Mine Menu (ESC)</span>
+            </button>
+        </div>
+
+        <!-- Inventory Panel -->
+        <div id="inventoryPanel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Inventory</h3>
+                <div class="panel-actions">
+                    <button id="inventoryDropBtn" class="action-btn" title="Drop Item">🗑️ Drop</button>
+                    <button id="inventoryEquipBtn" class="action-btn" title="Equip Item">⚔️ Equip</button>
+                    <button id="inventoryUseBtn" class="action-btn" title="Use Item">🧪 Use</button>
+                    <button id="inventorySortBtn" class="action-btn" title="Sort Inventory">🔀 Sort</button>
+                </div>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="panel-content">
+                <div class="inventory-grid"></div>
+            </div>
+        </div>
+
+        <!-- Equipment Panel -->
+        <div id="equipmentPanel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Equipment</h3>
+                <div class="panel-actions">
+                    <button id="equipmentUnequipBtn" class="action-btn" title="Unequip Item">🗑️ Unequip</button>
+                </div>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="panel-content">
+                <div class="equipment-slots">
+                    <div class="slot" data-slot="helmet">
+                        <div class="slot-label">Helmet</div>
+                    </div>
+                    <div class="slot" data-slot="armor">
+                        <div class="slot-label">Armor</div>
+                    </div>
+                    <div class="slot" data-slot="boots">
+                        <div class="slot-label">Boots</div>
+                    </div>
+                    <div class="slot" data-slot="pickaxe">
+                        <div class="slot-label">Pickaxe</div>
+                    </div>
+                    <div class="slot" data-slot="gloves">
+                        <div class="slot-label">Gloves</div>
+                    </div>
+                    <div class="slot" data-slot="amulet">
+                        <div class="slot-label">Amulet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Panel -->
+        <div id="statsPanel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Player Stats</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="panel-content">
+                <div class="stats-sections">
+                    <!-- Stats Tab -->
+                    <div id="statsTab" class="tab-content active">
+                        <div class="stats-sections">
+                            <!-- Combat Stats -->
+                            <div class="stats-section">
+                                <h4 class="section-title">⚔️ Combat</h4>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Attack:</span>
+                                        <span class="stat-value" id="statAttack">10</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Defense:</span>
+                                        <span class="stat-value" id="statDefense">5</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Health:</span>
+                                        <span class="stat-value" id="statHealth">100/100</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Critical Chance:</span>
+                                        <span class="stat-value" id="statCritChance">10%</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Regen Rate:</span>
+                                        <span class="stat-value" id="statRegenRate">0 HP/s</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Damage Reduction:</span>
+                                        <span class="stat-value" id="statDamageReduction">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mining Stats -->
+                            <div class="stats-section">
+                                <h4 class="section-title">⛏️ Mining</h4>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Mining Power:</span>
+                                        <span class="stat-value" id="statMiningPower">1</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Mining Efficiency:</span>
+                                        <span class="stat-value" id="statMiningEfficiency">0%</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Materials Mined:</span>
+                                        <span class="stat-value" id="statMaterialsMined">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Auto-Mining:</span>
+                                        <span class="stat-value" id="statAutoMining">Disabled</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Progression Stats -->
+                            <div class="stats-section">
+                                <h4 class="section-title">📈 Progression</h4>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Level:</span>
+                                        <span class="stat-value" id="statLevel">1</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Experience:</span>
+                                        <span class="stat-value" id="statExperience">0/100</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Coins:</span>
+                                        <span class="stat-value" id="statCoins">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Playtime:</span>
+                                        <span class="stat-value" id="statPlaytime">0:00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Equipment Stats -->
+                            <div class="stats-section">
+                                <h4 class="section-title">🛡️ Equipment</h4>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Equipment Power:</span>
+                                        <span class="stat-value" id="statEquipPower">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Equipment Value:</span>
+                                        <span class="stat-value" id="statEquipValue">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Items Equipped:</span>
+                                        <span class="stat-value" id="statItemsEquipped">0/6</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Special Stats -->
+                            <div class="stats-section">
+                                <h4 class="section-title">✨ Special</h4>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Luck:</span>
+                                        <span class="stat-value" id="statLuck">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Speed:</span>
+                                        <span class="stat-value" id="statSpeed">1.0x</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Skill Points:</span>
+                                        <span class="stat-value" id="statSkillPoints">0</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Status Effects:</span>
+                                        <span class="stat-value" id="statStatusEffects">None</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Panel -->
+        <div id="achievementsPanel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Achievements</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="panel-content">
+                <div class="achievements-container">
+                    <div class="achievement-categories">
+                        <div class="category-section">
+                            <h4 class="category-title">🏆 Combat Achievements</h4>
+                            <div class="achievement-list" id="combatAchievements">
+                                <!-- Combat achievements will be populated here -->
+                            </div>
+                        </div>
+
+                        <div class="category-section">
+                            <h4 class="category-title">⛏️ Mining Achievements</h4>
+                            <div class="achievement-list" id="miningAchievements">
+                                <!-- Mining achievements will be populated here -->
+                            </div>
+                        </div>
+
+                        <div class="category-section">
+                            <h4 class="category-title">📈 Progression Achievements</h4>
+                            <div class="achievement-list" id="progressionAchievements">
+                                <!-- Progression achievements will be populated here -->
+                            </div>
+                        </div>
+
+                        <div class="category-section">
+                            <h4 class="category-title">🛡️ Equipment Achievements</h4>
+                            <div class="achievement-list" id="equipmentAchievements">
+                                <!-- Equipment achievements will be populated here -->
+                            </div>
+                        </div>
+
+                        <div class="category-section">
+                            <h4 class="category-title">🎯 Special Achievements</h4>
+                            <div class="achievement-list" id="specialAchievements">
+                                <!-- Special achievements will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Panel -->
+        <div id="skillsPanel" class="panel hidden">
+            <div class="panel-header">
+                <h3>Skills</h3>
+                <div class="panel-actions">
+                    <button id="skills-reset-btn" class="action-btn" title="Reset Skills">🔄 Reset</button>
+                </div>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="panel-content">
+                <div class="skill-points-display">
+                    <div class="skill-points">
+                        <span class="label">Skill Points:</span>
+                        <span class="value" id="skillPointsValue">0</span>
+                    </div>
+                </div>
+
+                <div class="skill-trees-container">
+                    <!-- Combat Skills -->
+                    <div class="skill-tree-section">
+                        <h4 class="skill-tree-title">⚔️ Combat Skills</h4>
+                        <div class="skill-grid" id="combatSkillGrid">
+                            <!-- Combat skills will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Mining Skills -->
+                    <div class="skill-tree-section">
+                        <h4 class="skill-tree-title">⛏️ Mining Skills</h4>
+                        <div class="skill-grid" id="miningSkillGrid">
+                            <!-- Mining skills will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Defense Skills -->
+                    <div class="skill-tree-section">
+                        <h4 class="skill-tree-title">🛡️ Defense Skills</h4>
+                        <div class="skill-grid" id="defenseSkillGrid">
+                            <!-- Defense skills will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dialog Container -->
+        <div id="dialogContainer" class="dialog-container hidden">
+            <div class="dialog">
+                <div class="dialog-header">
+                    <h3 id="dialogTitle">Dialog</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="dialog-content">
+                    <p id="dialogMessage"></p>
+                    <div id="dialogOptions" class="dialog-options"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen hidden">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <h1>Mine Quest</h1>
+                <div class="loading-spinner"></div>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Loading... 0%</div>
+            </div>
+            <div class="loading-tips">
+                <p id="loadingTip">Initializing game world...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div id="contextMenu" class="context-menu hidden">
+        <div class="context-menu-content"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

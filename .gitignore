@@ -1,0 +1,34 @@
+# .gitignore
+# Dependency directories
+node_modules/
+
+# Design files
+.design/
+.old/
+.gen/
+.save/
+
+# Build output
+/dist/
+
+# Vite cache
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+
+# TODO file 
+TODO.md
+SECURITY_CHECKLIST.md
+dev_.md
+CODEBASE_ANALYSIS.md

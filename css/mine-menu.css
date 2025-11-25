@@ -1,0 +1,107 @@
+/* css/mine-menu.css */
+
+.mine-menu-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(10, 14, 24, 0.85);
+    backdrop-filter: blur(6px);
+    z-index: 1500;
+    transition: opacity 0.2s ease;
+    opacity: 1;
+}
+
+.mine-menu-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mine-menu {
+    min-width: 260px;
+    max-width: 320px;
+    padding: 28px 32px;
+    background: linear-gradient(150deg, rgba(20, 32, 54, 0.95) 0%, rgba(12, 17, 28, 0.95) 100%);
+    border: 2px solid rgba(74, 144, 226, 0.6);
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    outline: none;
+}
+
+.mine-menu__title {
+    margin: 0;
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #e3f3ff;
+    text-shadow: 0 0 12px rgba(74, 144, 226, 0.35);
+}
+
+.mine-menu__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mine-menu__button {
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #2d4b79 0%, #1c2f4b 100%);
+    border: 1px solid rgba(105, 164, 238, 0.65);
+    border-radius: 10px;
+    color: #d8eaff;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.mine-menu__button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #3d69a7 0%, #25406b 100%);
+    box-shadow: 0 8px 22px rgba(74, 144, 226, 0.35);
+}
+
+.mine-menu__button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.mine-menu__button--primary {
+    background: linear-gradient(135deg, #47a3ff 0%, #1c6ed3 100%);
+    border-color: rgba(119, 188, 255, 0.75);
+    color: #f0f6ff;
+}
+
+.mine-menu__button--primary:hover {
+    background: linear-gradient(135deg, #5ab4ff 0%, #2580f0 100%);
+}
+
+.mine-menu__button--danger {
+    background: linear-gradient(135deg, #b84242 0%, #7f2525 100%);
+    border-color: rgba(255, 120, 120, 0.7);
+    color: #ffecec;
+}
+
+.mine-menu__button--danger:hover {
+    background: linear-gradient(135deg, #cf5454 0%, #922f2f 100%);
+}
+
+@media (max-width: 600px) {
+    .mine-menu {
+        width: 90vw;
+        padding: 24px;
+    }
+
+    .mine-menu__title {
+        font-size: 22px;
+    }
+
+    .mine-menu__button {
+        font-size: 15px;
+        padding: 11px 16px;
+    }
+}

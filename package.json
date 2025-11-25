@@ -1,0 +1,22 @@
+{
+  "name": "mine-quest",
+  "version": "0.4.7",
+  "description": "Mine Quest - An underground explorer game",
+  "scripts": {
+    "start": "npx http-server . -p 8000 -c-1",
+    "dev": "npx http-server . -p 8000 -c-1 --cors",
+    "preview": "npx http-server . -p 8000 -c-1 --cors -o"
+  },
+  "keywords": [
+    "game",
+    "mine",
+    "quest",
+    "javascript",
+    "canvas"
+  ],
+  "author": "Mine Quest Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

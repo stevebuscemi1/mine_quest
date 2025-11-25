@@ -1,0 +1,2 @@
+Placeholder for Health Potion texture.
+Replace this file with the actual PNG/JPG image asset for the Health Potion consumable item.

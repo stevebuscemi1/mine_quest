@@ -1,0 +1,2 @@
+Placeholder for Speed Potion texture.
+Replace this file with the actual PNG/JPG image asset for the Speed Potion consumable item.

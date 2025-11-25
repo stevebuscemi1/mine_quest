@@ -1,0 +1,2 @@
+Placeholder for Diamond Pickaxe texture.
+Replace this file with the actual PNG/JPG image asset for the Diamond Pickaxe equipment item.

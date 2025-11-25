@@ -1,0 +1,2 @@
+Placeholder for Iron Helmet texture.
+Replace this file with the actual PNG/JPG image asset for the Iron Helmet equipment item.

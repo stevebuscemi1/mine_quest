@@ -1,0 +1,993 @@
+/* Bottom Controls */
+.bottom-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.9);
+    border-top: 2px solid #444;
+}
+
+.control-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #84601699 0%, #845f1633 100%);
+    border: 2px solid #4a90e2;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #3d659d 0%, #2a476e 100%);
+    box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.control-btn .icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.control-btn .label {
+    font-size: 12px;
+    color: #b0d4ff;
+}
+
+/* Touch Controls - Only show on touch devices */
+.touch-controls {
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+    display: none;
+}
+
+.touch-device .touch-controls {
+    display: block !important;
+}
+
+/* Options Panel Styles */
+.options-panel {
+    text-align: left;
+    padding: 10px;
+}
+
+.option-group {
+    margin-bottom: 20px;
+}
+
+.option-group h4 {
+    color: #4a90e2;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.option-item {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option-item label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.option-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.option-item input[type="range"] {
+    flex: 1;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+/* Stats Panel Styles */
+#statsPanel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(95vw, 1040px);
+    min-width: 720px;
+    height: min(88vh, 720px);
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 40px);
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid #4a90e2;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#statsPanel .panel-header {
+    background: linear-gradient(135deg, #84601699 0%, #845f1633 100%);
+    padding: 15px 20px;
+    border-bottom: 2px solid #4a90e2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#statsPanel .panel-header h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 20px;
+}
+
+#statsPanel .panel-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Stats Tabs */
+.stats-tabs {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-buttons {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4a90e2;
+}
+
+.tab-btn.active {
+    background: #4a90e2;
+    color: #ffffff;
+}
+
+.tab-content {
+    display: none;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Stats Sections */
+.stats-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.stats-section {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.section-title {
+    color: #4a90e2;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #4a90e2;
+    font-size: 16px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-label {
+    color: #ccc;
+    font-size: 13px;
+}
+
+.stat-value {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Achievement Styles */
+.achievements-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.achievement-categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.category-section {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.category-title {
+    color: #4a90e2;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #4a90e2;
+    font-size: 14px;
+}
+
+.achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+}
+
+.achievement-item.unlocked {
+    border-color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.achievement-item.locked {
+    border-color: #333;
+    opacity: 0.7;
+}
+
+.achievement-icon {
+    font-size: 20px;
+    margin-right: 10px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-name {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.achievement-description {
+    color: #ccc;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.achievement-progress {
+    margin-top: 5px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a90e2 0%, #63b3ed 100%);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    color: #888;
+    font-size: 10px;
+}
+
+.achievement-reward {
+    margin-top: 5px;
+    padding: 5px;
+    background: rgba(0, 200, 0, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(0, 200, 0, 0.3);
+}
+
+.reward-text {
+    color: #00cc00;
+    font-size: 10px;
+}
+
+/* Skills Styles */
+.skill-points-display {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #4a90e2;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.skill-points-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.skill-points-label {
+    color: #4a90e2;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.skill-points-value {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    background: rgba(74, 144, 226, 0.2);
+    padding: 5px 15px;
+    border-radius: 20px;
+    min-width: 50px;
+    display: inline-block;
+}
+
+.skill-trees {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.skill-tree {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.tree-title {
+    color: #4a90e2;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #4a90e2;
+    font-size: 14px;
+}
+
+.skill-nodes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skill-node {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border: 1px solid #444;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.skill-node.available {
+    border-color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+}
+
+.skill-node.available:hover {
+    border-color: #63b3ed;
+    background: rgba(99, 179, 237, 0.2);
+    transform: translateY(-2px);
+}
+
+.skill-node.unlocked {
+    border-color: #00cc00;
+    background: rgba(0, 200, 0, 0.1);
+}
+
+.skill-node.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.skill-icon {
+    font-size: 18px;
+    margin-right: 10px;
+    min-width: 25px;
+    text-align: center;
+}
+
+.skill-info {
+    flex: 1;
+}
+
+.skill-name {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.skill-description {
+    color: #ccc;
+    font-size: 10px;
+    margin-bottom: 3px;
+}
+
+.skill-level {
+    color: #00cc00;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.skill-cost {
+    color: #4a90e2;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+/* Inventory Panel Styles */
+#inventoryPanel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(95vw, 1040px);
+    min-width: 720px;
+    height: min(88vh, 720px);
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 40px);
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid #4a90e2;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#inventoryPanel .panel-header {
+    background: linear-gradient(135deg, #84601699 0%, #845f1633 100%);
+    padding: 15px 20px;
+    border-bottom: 2px solid #4a90e2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#inventoryPanel .panel-header h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 18px;
+}
+
+#inventoryPanel .panel-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Inventory Grid */
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(5, 80px);
+    gap: 10px;
+    justify-content: center;
+}
+
+.inventory-slot {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inventory-grid .item-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 4px;
+}
+
+.inventory-slot:hover {
+    border-color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-1px);
+}
+
+.inventory-slot.has-item {
+    border-color: #00cc00;
+    background: rgba(0, 200, 0, 0.1);
+}
+
+.inventory-slot.selected {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.item-count {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    background: #333;
+    color: #fff;
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 2px;
+    min-width: 12px;
+    text-align: center;
+}
+
+/* Panel Common Styles */
+.panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid #4a90e2;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel.hidden {
+    display: none !important;
+}
+
+.panel-header {
+    background: linear-gradient(135deg, #84601699 0%, #845f1633 100%);
+    padding: 15px 20px;
+    border-bottom: 2px solid #4a90e2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.panel-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Equipment Panel Styles */
+#equipmentPanel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(95vw, 1040px);
+    min-width: 720px;
+    height: min(88vh, 720px);
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 40px);
+    background: url('../assets/images/ui/dialogs/equipment_bg.png') center/cover no-repeat;
+    background-color: rgba(26, 26, 26, 0.95);
+    border: 2px solid #4a90e2;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(74, 144, 226, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#equipmentPanel .panel-header {
+    background: linear-gradient(135deg, #84601699 0%, #845f1633 100%);
+    padding: 15px 20px;
+    border-bottom: 2px solid #4a90e2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#equipmentPanel .panel-header h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 18px;
+}
+
+#equipmentPanel .panel-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Equipment Slots */
+.equipment-slots {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
+    column-gap: 150px;
+    row-gap: 150px;
+    justify-content: center;
+    align-content: center;
+}
+
+.slot {
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid #444;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.slot:hover {
+    border-color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-2px);
+}
+
+.slot.has-item {
+    border-color: #00cc00;
+    background: rgba(0, 200, 0, 0.1);
+}
+
+.slot-label {
+    font-size: 10px;
+    color: #ccc;
+    text-align: center;
+    margin-top: 5px;
+    line-height: 1.2;
+}
+
+.item-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.durability-bar {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+#equipmentPanel .panel-header h3 {
+    color: #ffffff;
+    margin: 0;
+    font-size: 18px;
+}
+
+#equipmentPanel .panel-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Equipment Slots */
+.equipment-slots {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
+    column-gap: 150px;
+    row-gap: 150px;
+    justify-content: center;
+    align-content: center;
+}
+
+.slot {
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid #444;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.slot:hover {
+    border-color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-2px);
+}
+
+.slot.has-item {
+    border-color: #00cc00;
+    background: rgba(0, 200, 0, 0.1);
+}
+
+.slot-label {
+    font-size: 10px;
+    color: #ccc;
+    text-align: center;
+    margin-top: 5px;
+    line-height: 1.2;
+}
+
+.item-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.durability-bar {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.durability-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #00cc00 0%, #ffcc00 50%, #ff4444 100%);
+    width: var(--durability-percent, 100%);
+    transition: width 0.3s ease;
+}
+
+/* Merchant Dialog Styles */
+.merchant-slot, .player-inventory-slot {
+    width: 80px;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #444;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.merchant-slot:hover, .player-inventory-slot:hover {
+    border-color: #4a90e2;
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateY(-1px);
+}
+
+.merchant-slot.has-item, .player-inventory-slot.has-item {
+    border-color: #00cc00;
+    background: rgba(0, 200, 0, 0.1);
+}
+
+.merchant-slot.selected, .player-inventory-slot.selected {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.merchant-slot.empty, .player-inventory-slot.empty {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: #333;
+}
+
+/* Merchant Dialog Responsive */
+@media (max-width: 768px) {
+    .merchant-slot, .player-inventory-slot {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.tooltip-section {
+    color: #4a90e2;
+    font-weight: bold;
+    margin-top: 5px;
+    border-top: 1px solid rgba(74, 144, 226, 0.3);
+    padding-top: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #inventoryPanel {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 120px);
+    }
+
+    #equipmentPanel {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 120px);
+    }
+
+    #statsPanel {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 100px);
+    }
+
+    .inventory-grid {
+        grid-template-columns: repeat(4, 80px);
+        grid-template-rows: repeat(5, 80px);
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .inventory-slot {
+        width: 80px;
+        height: 80px;
+    }
+
+    .equipment-slots {
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(3, auto);
+        column-gap: 120px;
+        row-gap: 120px;
+        justify-content: center;
+    }
+
+    .slot {
+        width: 80px;
+        height: 80px;
+        aspect-ratio: 1;
+    }
+
+    .item-icon {
+        width: 90%;
+        height: 90%;
+        max-width: 60px;
+        max-height: 60px;
+    }
+
+    .stats-sections {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .achievement-categories {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .skill-trees {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .tab-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    .bottom-controls {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .control-btn {
+        padding: 8px 12px;
+        min-width: 80px;
+    }
+
+    .control-btn .icon {
+        font-size: 18px;
+        margin-bottom: 2px;
+    }
+
+    .control-btn .label {
+        font-size: 10px;
+    }
+}
