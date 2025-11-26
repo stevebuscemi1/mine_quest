@@ -4,7 +4,7 @@
 
 We take the security of Mine Quest seriously. If you discover a vulnerability, please **do not** publish it publicly. Instead, report it responsibly:
 
-- **Email:** security@minequest.dev
+- **Email:** minequest.subsystem972@passinbox.com
 - **PGP Key:** (optional) 0xDEADBEEF (public key available at https://github.com/stevebuscemi1/mine_quest/keys)
 
 ### What We Expect
